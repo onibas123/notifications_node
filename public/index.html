@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Estado Actual Interior</title>
+  <!--  CSS -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/custom.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome/css/font-awesome.min.css">
+  <!-- JS -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
+  
+</head>
+<body>
+  <!--
+  <h1>My App</h1>
+
+  <div id="messages"></div>
+  <br>
+  <form onsubmit="return addMessage(this)">
+	   <input type="text" id="username" placeholder="Tu Nombre" >
+      <input type="text" id="texto" placeholder="Cuéntanos algo...">
+      <input type="submit" value="Enviar!">
+  </form>
+-->
+<div class="wrapper">
+  <div class="content-wrapper">
+  <section class="content">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="box box-success">
+          <div class="box-header ui-sortable-handle" style="cursor: move;">
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-2">
+                  <!--<h4 class="box-title">Estado Actual Interior :</h4>-->
+                  <table class="table">
+                    <tr>
+                      <td align="center"><h2>PEATONES</h2></td>
+                      <td align="center"><h2 id="h2-general-people-count">0</h2></td>
+                      <td align="center"><h2>VEHICULOS</h2></td>
+                      <td align="center"><h2 id="h2-general-vehicles-count">0</h2></td>
+                    </tr>
+                  </table>
+                   <hr>
+                </div>
+              </div>
+            </div>
+           
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="col-md-2">
+                  <div class="wrimagecard wrimagecard-topimage">
+                    <a href="#">
+                    <div class="wrimagecard-topimage_header" style="background-color: rgba(119, 178, 88, 0.1)">
+                      
+                      
+                      <table style="width: 100%;">
+                        <tr>
+                          <td align="center" width="40%"><i class="fa fa-users fa-3x"></i></td>
+                          <td align="center" width="60%"><label style="font-size: 40px;" id="label-external-people-count">0</label></td>
+                        </tr>
+                      </table>
+                    
+                    </div>
+                    <div class="wrimagecard-topimage_title">
+                      <center>
+                        <h5>Externos</h5>
+                      </center>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="wrimagecard wrimagecard-topimage">
+                    <a href="#">
+                    <div class="wrimagecard-topimage_header" style="background-color: rgba(119, 178, 88, 0.1)">
+
+                      <table style="width: 100%;">
+                        <tr>
+                          <td align="center" width="40%"><i class="fa fa-car fa-3x"></i></td>
+                          <td align="center" width="60%"><label style="font-size: 40px;" id="label-external-vehicles-count">0</label></td>
+                        </tr>
+                      </table>
+
+                    </div>
+                    <div class="wrimagecard-topimage_title">
+                      <center>
+                        <h5>Externos</h5>
+                      </center>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="wrimagecard wrimagecard-topimage">
+                    <a href="#">
+                    <div class="wrimagecard-topimage_header" style="background-color: red;">
+                      <table style="width: 100%;">
+                        <tr>
+                          <td align="center" width="40%"><font color="white"><i class="fa fa-users fa-3x"></i></font></td>
+                          <td align="center" width="60%"><font color="white"><label style="font-size: 40px;" id="label-external-people-exc-count">0</label></font></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="wrimagecard-topimage_title">
+                      <center>
+                        <h5>Excedidos</h5>
+                      </center>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="wrimagecard wrimagecard-topimage">
+                    <a href="#">
+                    <div class="wrimagecard-topimage_header" style="background-color: red;">
+                      <table style="width: 100%;">
+                        <tr>
+                          <td align="center" width="40%"><font color="white"><i class="fa fa-car fa-3x"></i></font></td>
+                          <td align="center" width="60%"><font color="white"><label style="font-size: 40px;" id="label-external-vehicles-exc-count">0</label></font></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="wrimagecard-topimage_title">
+                      <center>
+                        <h5>Excedidos</h5>
+                      </center>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="wrimagecard wrimagecard-topimage">
+                    <a href="#">
+                    <div class="wrimagecard-topimage_header" style="background-color: rgba(119, 178, 88, 0.1)">
+                      
+                      
+                      <table style="width: 100%;">
+                        <tr>
+                          <td align="center" width="40%"><i class="fa fa-users fa-3x"></i></td>
+                          <td align="center" width="60%"><label style="font-size: 40px;" id="label-internal-people-count">0</label></td>
+                        </tr>
+                      </table>
+                    
+                    </div>
+                    <div class="wrimagecard-topimage_title">
+                      <center>
+                        <h5>Internos</h5>
+                      </center>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="wrimagecard wrimagecard-topimage">
+                    <a href="#">
+                    <div class="wrimagecard-topimage_header" style="background-color: rgba(119, 178, 88, 0.1)">
+
+                      <table style="width: 100%;">
+                        <tr>
+                          <td align="center" width="40%"><i class="fa fa-car fa-3x"></i></td>
+                          <td align="center" width="60%"><label style="font-size: 40px;" id="label-internal-vehicles-count">0</label></td>
+                        </tr>
+                      </table>
+
+                    </div>
+                    <div class="wrimagecard-topimage_title">
+                      <center>
+                        <h5>Internos</h5>
+                      </center>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <br><br>
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="col-md-12">
+                  <h3>Notificaciones:</h3>
+                      <table id="table-notifications" class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Notificación</th>
+                              <th>Puerta</th>
+                              <th>Movimiento</th>
+                              <th>Fecha</th>
+                              <th>Encargado</th>
+                            </tr>
+                          </thead>
+                          <tbody id="body-notifications"></tbody>
+                      </table>
+                
+              </div>
+              </div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</div>
+</div>
+
+
+<!-- MODALS -->
+<div  id="modal-access_people" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body">
+            <main>
+            
+            <input id="tab1" type="radio" name="tabs" checked>
+            <label for="tab1"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Datos Acceso</label>
+
+            <input id="tab2" type="radio" name="tabs">
+            <label for="tab2"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Persona</label>
+              
+            <input id="tab3" type="radio" name="tabs">
+            <label for="tab3"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Motivos</label>
+              
+            <input id="tab4" type="radio" name="tabs">
+            <label for="tab4"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Ubicaciones</label>
+              
+            <div id="content1" class="tab-pane">
+              <fieldset>
+              <legend>Datos Acceso</legend>
+
+                <table style="width: 100%;">
+                  <tr>
+                    <td><label>Portería</label></td>
+                    <td id="td-main_access"></td>    
+                  </tr>
+
+                  <tr>
+                    <td><label>Movimiento</label></td>
+                    <td id="td-entry"></td>    
+                  </tr>
+
+                  <tr>
+                    <td><label>Horas</label></td>
+                    <td id="td-hours"></td>    
+                  </tr>
+                
+                  <tr>
+                    <td><label>Hora Salida</label></td>
+                    <td id="td-end_time"></td>    
+                  </tr>
+
+                  <tr>
+                    <td><label>Estado</label></td>
+                    <td id="td-access_state"></td>    
+                  </tr>
+
+                  <tr>
+                    <td><label>Observación</label></td>
+                    <td>
+                      <textarea readonly class="form-control" rows="6" id="area-observation"></textarea>
+                    </td>    
+                  </tr>
+
+                </table>
+
+              </fieldset>
+            </div>
+              
+            <div id="content2" class="tab-pane">
+              <fieldset>
+              <legend>Datos Persona</legend>
+                <table style="width: 100%;">
+
+                  <tr>
+                    <td><label>Rut</label></td>
+                    <td id="td-rut">Cargando...</td>
+                  </tr>
+
+                  <tr>
+                    <td><label>Nombre</label></td>
+                    <td id="td-name">Cargando...</td>
+                  </tr>
+
+                  <tr>
+                    <td><label>Teléfono</label></td>
+                    <td id="td-phone">Cargando...</td>
+                  </tr>
+
+                  <tr>
+                    <td><label>Email</label></td>
+                    <td id="td-email">Cargando...</td>
+                  </tr>
+
+                  <tr>
+                    <td><label>Perfil</label></td>
+                    <td id="td-profile">Cargando...</td>
+                  </tr>
+
+                  <tr>
+                    <td><label>Empresa</label></td>
+                    <td id="td-company">Cargando...</td>
+                  </tr>
+
+                </table>
+              </fieldset>
+            </div>
+              
+             <div id="content3" class="tab-pane">
+              <fieldset>
+              <legend>Motivos de Visita</legend>
+                
+                <table style="width: 100%;" id="table-reasons_visit">
+                  
+                  <tr>
+                    <td><label>Motivo</label></td>    
+                    <td>Cargando...</td>
+                  </tr>
+                
+                </table>
+              
+              </fieldset>
+              <br>
+              <fieldset>
+              <legend>Personas a Visitar</legend>
+
+                <table style="width: 100%;" id="table-people_visit">
+
+                  <tr>
+                    <td><label>Persona</label></td>    
+                    <td>Cargando...</td>
+                  </tr>
+
+                </table>
+
+              </fieldset>
+            </div>
+            
+            <div id="content4" class="tab-pane">
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <div class="col-md-4">
+                    <fieldset>
+                    <legend>Zonas</legend>
+                    <table style="width: 100%;" id="table-zones">
+                      
+                    </table>
+                    </fieldset>
+                  </div>
+
+                  <div class="col-md-4">
+                    <fieldset>
+                    <legend>Áreas</legend>
+                    <table style="width: 100%;" id="table-areas">
+                      
+                    </table>
+                    </fieldset>
+                  </div>
+
+                  <div class="col-md-4">
+                    <fieldset>
+                    <legend>Deptos.</legend>
+                     <table style="width: 100%;" id="table-department">
+                      
+                    </table>
+                    </fieldset>
+                  </div>
+
+                </div>
+              </div>
+              <br>
+              
+              <fieldset>
+              <legend>Ruta de Puertas</legend>
+                <br>
+                <div id="div-route" style="width: 100%;"></div>
+              </fieldset>
+            </div>
+            
+          </main>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/moment.min.js"></script>
+
+<script type="text/javascript">
+  
+  //connection variables
+  var server = 'http://127.0.0.1:8080/';
+  var project_name = 'Control_Acceso/';
+  //var server = 'http://192.10.10.98:8080/';
+  //var project_name = 'Control_Acceso/';
+  //var server = 'http://localhost:8888/'
+  //var project_name = 'ca_md/';
+
+  var cont_external_people = 0;
+  var cont_external_vehicles = 0;
+  var cont_external_people_exc = 0;
+  var cont_external_vehicles_exc = 0;
+  var internal_people = 0;
+  var internal_vehicles = 0;
+
+  $(document).ready(function() {
+
+    getAccess();
+    setInterval(getCurrentTime, 1000);
+    setInterval(getCount, 1000);
+  });  
+
+  var url = '';
+
+  function getAccess()
+  {
+    var html = '';
+
+    $.ajax({
+      // url: 'http://192.10.10.98:8080/Control_Acceso/index.php/cAccess/getAccess/', 
+      url: server+project_name+'index.php/cAccess/getAccess/', 
+      dataType: 'json',
+      success: function(data)
+      {
+        if(data.access_people != null && data.access_people.length > 0)
+        {
+          for(var i=0;i<data.access_people.length;i++)
+          {
+            html += '<tr id="tr-'+data.access_people[i].id+'" style="cursor: pointer;" onclick="showAccessPeople('+data.access_people[i].id+');">';
+            //html += '<tr>';
+            html += '<td>'+data.access_people[i].id+'</td>';
+            html += '<td>'+data.access_people[i].rut+'-'+data.access_people[i].digit+'</td>';
+            html += '<td>'+data.access_people[i].name+' '+data.access_people[i].last_name+'</td>';
+            html += '<td>'+data.access_people[i].profile+'</td>';
+            html += '<td>Peatonal</td>';
+            html += '<td>'+data.access_people[i].company+'</td>';
+            html += '<td class="date_time_created" id="'+data.access_people[i].created_+'">'+data.access_people[i].created+'</td>';
+            html += '<td class="date_time_end_time" id="'+data.access_people[i].end_time_+'">'+data.access_people[i].end_time+'</td>';
+            html += '<td class="date_time_current"></td>';
+            html += '</tr>';
+          }
+        }
+
+        $('#body-access_real_time').html(html);
+        
+        //getCurrentTime();
+      }
+    });
+  }
+
+  function getCurrentTime()
+  {
+    /*
+    var fecha1 = moment($('.date_time_created').attr('id'));
+    var fecha2 = moment(getToday());
+
+    var diff_final = '';
+
+    var dif_days = fecha2.diff(fecha1, 'days');
+    var dif_hours = fecha2.diff(fecha1, 'hours');
+    var dif_minutes = fecha2.diff(fecha1, 'minutes');
+    var dif_seconds = fecha2.diff(fecha1, 'seconds');
+
+    
+    if(dif_days == 0 && dif_hours == 0 && dif_minutes == 0 && dif_seconds > 0)
+    {
+        diff_final = '00:00:'+dif_seconds;
+    }
+    else if(dif_days == 0 && dif_hours == 0 && dif_minutes > 0)
+    {
+         diff_final  = '00:'+dif_minutes+':'+Math.round((((dif_seconds/60) - dif_minutes ) * 60 ));
+    }
+    else if(dif_days == 0 &&  dif_hours > 0)
+    {
+
+      diff_final  = dif_hours+':'+Math.round((((dif_minutes/60) - dif_hours ) * 60 ))+':'+Math.round((((dif_seconds/60) - dif_minutes ) * 60 ));
+    }
+    else if(dif_days > 0)
+    {
+      diff_final  = ''+dif_days+'d '+Math.round((((dif_hours/24) - dif_days ) * 24 ))+':'+Math.round((((dif_minutes/60) - dif_hours ) * 60 ))+':'+Math.round((((dif_seconds/60) - dif_minutes ) * 60 ));
+    }
+
+    $('.date_time_current').html(diff_final);
+    */
+    
+    var created = document.getElementsByClassName('date_time_created');
+    var end_time = document.getElementsByClassName('date_time_end_time');
+    var current = document.getElementsByClassName('date_time_current');
+
+    for(var i=0;i<created.length;i++)
+    {
+
+      var fecha_ini = moment($(created[i]).attr('id'));
+      var end_time = moment($(end_time[i]).attr('id'));
+
+      var diferencia = fecha_ini.diff(end_time, 'seconds');
+      //alert(diferencia);      
+
+      //-------------------------------------------------
+
+      var fecha1 = moment($(created[i]).attr('id'));
+      var fecha2 = moment(getToday());
+
+      var diff_final = '';
+
+      var dif_days = fecha2.diff(fecha1, 'days');
+      var dif_hours = fecha2.diff(fecha1, 'hours');
+      var dif_minutes = fecha2.diff(fecha1, 'minutes');
+      var dif_seconds = fecha2.diff(fecha1, 'seconds');
+
+      
+      if(dif_days == 0 && dif_hours == 0 && dif_minutes == 0 && dif_seconds > 0)
+      {
+          diff_final = '00:00:'+dif_seconds;
+      }
+      else if(dif_days == 0 && dif_hours == 0 && dif_minutes > 0)
+      {
+           diff_final  = '00:'+dif_minutes+':'+Math.round((((dif_seconds/60) - dif_minutes ) * 60 ));
+      }
+      else if(dif_days == 0 &&  dif_hours > 0)
+      {
+
+        diff_final  = dif_hours+':'+Math.round((((dif_minutes/60) - dif_hours ) * 60 ))+':'+Math.round((((dif_seconds/60) - dif_minutes ) * 60 ));
+      }
+      else if(dif_days > 0)
+      {
+        diff_final  = ''+dif_days+'d '+Math.round((((dif_hours/24) - dif_days ) * 24 ))+':'+Math.round((((dif_minutes/60) - dif_hours ) * 60 ))+':'+Math.round((((dif_seconds/60) - dif_minutes ) * 60 ));
+      }
+
+      $(current[i]).html(diff_final);
+    }
+  }
+
+  function getToday()
+  {
+    var hoy = new Date();
+    var dd = hoy.getDate();
+    var mm = hoy.getMonth()+1; //hoy es 0!
+    var yyyy = hoy.getFullYear();
+
+    var seconds = hoy.getSeconds();
+    var minutes = hoy.getMinutes();
+    var hour = hoy.getHours();
+
+
+    if(dd<10) {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) {
+        mm='0'+mm;
+    } 
+
+    return yyyy+'-'+mm+'-'+dd+' '+hour+':'+minutes+':'+seconds;
+  }
+
+  function getCount()
+  {
+    $.ajax({
+      // url: 'http://192.10.10.98:8080/Control_Acceso/index.php/cAccess/getCount/',
+      url: server+project_name+'index.php/cAccess/getCount/',
+      dataType: 'json',
+      success: function(data)
+      {
+        $('#h2-general-people-count').html(data.total_people);
+        $('#label-external-people-count').html(data.access_people_permitidos);
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
